@@ -1,0 +1,7 @@
+{
+    "name": "developerdynamo/push-notification",
+    "description": "Extensible Laravel package to send push notification across all platforms",
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
