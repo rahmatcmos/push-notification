@@ -12,5 +12,5 @@
 	        "App\\": "app/",
 	        "DeveloperDynamo\\PushNotification\\": "/src"
 	    }
-	},
+	}
 }
