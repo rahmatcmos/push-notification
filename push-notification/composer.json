@@ -1,14 +1,7 @@
 {
     "name": "developerdynamo/push-notification",
-    "description": "Extensible PHP package to manage Push Notification services across all platforms",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Valerio Barbera",
-            "email": "ilvalerione@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {}
+    "description": "Extensible Laravel package to send push notification across all platforms",
+    "require": {
+        "php": ">=5.3.0"
+    }
 }
