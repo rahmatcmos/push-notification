@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PushNotification;
+namespace DeveloperDynamo\PushNotification;
 
-use App\PushNotification\Payload\AbstractPayload;
-use App\PushNotification\Driver\DriverInterface;
+use DeveloperDynamo\PushNotification\Payload\AbstractPayload;
+use DeveloperDynamo\PushNotification\Services\ServiceInterface;
 
 class PushNotificationBridge
 {
@@ -12,7 +12,7 @@ class PushNotificationBridge
 	 * 
 	 * @var array
 	 */
-	protected $drivers = [
+	protected $services = [
 			Services\GCM\AndroidService::class,
 			Services\APNS\ApnService::class,
 	];
@@ -22,24 +22,24 @@ class PushNotificationBridge
 	 * 
 	 * @throws \Exception
 	 * @param AbstractPayload $payload
-	 * @param array $tokens is an array [platform:'xxx', registration_id:'xxxxxx']
+	 * @param array<Token> $tokens
 	 */
 	public function send(AbstractPayload $payload, array $tokens)
 	{
 		/*
 		 * Retrieve drivers and cast to DriverInterface
 		 */
-		foreach($this->drivers as $driver){
+		foreach($this->services as $service){
 			/*
 			 * Create driver instance
 			 */
-			$instance = new $driver();
+			$instance = new $service();
 
 			/*
 			 * Check instance type
 			 */
-			if(! $instance instanceof DriverInterface){
-				throw new \Exception("Driver must be a DriverInterface implementation");
+			if(! $instance instanceof ServiceInterface){
+				throw new \InvalidArgumentException("Driver must be a DriverInterface implementation");
 			}
 			
 			/*

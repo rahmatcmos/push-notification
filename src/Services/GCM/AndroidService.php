@@ -6,7 +6,7 @@ use Config;
 use App\PushNotification\Driver\DriverInterface;
 use App\PushNotification\Payload\AbstractPayload;
 
-class AndroidService implements DriverInterface
+class AndroidService implements ServiceInterface
 {
 	/**
 	 * Name of platform

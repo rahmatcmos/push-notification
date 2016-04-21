@@ -14,8 +14,15 @@ Update composer with command:
 
 "composer update"
 
-#Add Notification Provider in Laravel 5
-Like all providers, add them to your config/app.php
+#Configure Laravel 5
+Like all providers, put this follow lines in your config/app.php
 
-'DeveloperDynamo\PushNotification\PushNotificationProvider',
+'providers' => [
+	...
+	DeveloperDynamo\PushNotification\PushNotificationProvider::class,
+],
  
+'aliases' => [
+	...
+	'Bleh' => DeveloperDynamo\PushNotification\Facades\PushNotificationBridge::class,
+],

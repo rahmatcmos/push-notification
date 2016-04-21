@@ -2,7 +2,7 @@
 
 namespace DeveloperDynamo\PushNotification\Services;
 
-interface DriverInterface
+interface ServiceInterface
 {	
 	public function getPlatformName();
 	public function send($payload, $tokens);
