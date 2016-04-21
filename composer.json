@@ -7,7 +7,7 @@
     "require": {},
     "autoload": {
 	    "psr-4": {
-	        "DeveloperDynamo\\PushNotification\\": "/src"
+	        "DeveloperDynamo\\PushNotification\\": "src/"
 	    }
 	}
 }
