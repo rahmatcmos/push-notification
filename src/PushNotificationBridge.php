@@ -13,8 +13,8 @@ class PushNotificationBridge
 	 * @var array
 	 */
 	private $services = [
-			DeveloperDynamo\PushNotification\Services\GCM\AndroidService::class,
-			DeveloperDynamo\PushNotification\Services\APNS\ApnService::class,
+			Services\GCM\AndroidService::class,
+			Services\APNS\ApnService::class,
 	];
 	
 	/**

@@ -1,6 +1,6 @@
 <?php
 
-namespace DeveloperDynamo\PushNotification\Facades
+namespace DeveloperDynamo\PushNotification\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
