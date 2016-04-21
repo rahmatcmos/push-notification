@@ -26,3 +26,10 @@ Like all providers, put this follow lines in your config/app.php
 	...
 	'NotificationBridge' => DeveloperDynamo\PushNotification\Facades\PushNotificationBridge::class,
 ],
+
+#Publish configuration
+Finally you need to generate a configuration file for this package.
+Run follow composer command:
+
+php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNotificationProvider" --tag="config"
+
