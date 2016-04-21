@@ -31,5 +31,5 @@ Like all providers, put this follow lines in your config/app.php
 Finally you need to generate a configuration file for this package.
 Run follow composer command:
 
-php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNotificationProvider" --tag="config"
+php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNotificationProvider"
 
