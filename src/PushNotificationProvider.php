@@ -17,7 +17,7 @@ class PushNotificationProvider extends ServiceProvider
     	
     	$this->publishes([
         	__DIR__.'/config/pushnotification.php' => config_path('pushnotification.php'),
-    	]);
+    	], 'config');
     }
 
     /**
@@ -27,6 +27,9 @@ class PushNotificationProvider extends ServiceProvider
      */
     public function register()
     {
+    	/*
+    	 * To retrieve configuration width "dot notation" Es: "pushnotification.ios.xxx"
+    	 */
     	$this->mergeConfigFrom( __DIR__.'/config/pushnotification.php', 'pushnotification');
     	
     	$this->app['NotificationBridge'] = $this->app->share(function($app) {
