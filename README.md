@@ -24,7 +24,7 @@ Like all providers, put this follow lines in your config/app.php
  
 'aliases' => [
 	...
-	'Bridge' => DeveloperDynamo\PushNotification\Facades\PushNotificationBridge::class,
+	'NotificationBridge' => DeveloperDynamo\PushNotification\Facades\PushNotificationBridge::class,
 ],
 
 #Publish configuration
