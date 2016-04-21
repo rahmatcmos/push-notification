@@ -13,7 +13,7 @@ class PushNotificationBridge
 	 * @var array
 	 */
 	protected $drivers = [
-			Services\GCM\Driver::class,
+			Services\GCM\AndroidService::class,
 			Services\APNS\ApnService::class,
 	];
 	

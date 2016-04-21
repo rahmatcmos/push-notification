@@ -9,8 +9,7 @@ Extensible Laravel package to send push notification across all platform
 Like all providers, add them to your config/app.php.
 
 /*
- Push Notification Service Providers
+ * Push Notification Service Providers
  */
- 
 'DeveloperDynamo\PushNotification\PushNotificationProvider',
  
