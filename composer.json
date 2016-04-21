@@ -4,12 +4,9 @@
     "type": "library",
     "license": "MIT",
     "keywords": ["laravel"],
-    "require": {
-        "php": ">=5.3.0"
-    },
+    "require": {},
     "autoload": {
 	    "psr-4": {
-	        "App\\": "app/",
 	        "DeveloperDynamo\\PushNotification\\": "/src"
 	    }
 	}
