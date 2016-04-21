@@ -1,2 +1,2 @@
 # push-notification
-Extensible Laravel package to manage push notification sending across all platform
+Extensible Laravel package to send push notification across all platform
