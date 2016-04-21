@@ -12,9 +12,9 @@ class PushNotificationBridge
 	 * 
 	 * @var array
 	 */
-	protected $services = [
-			Services\GCM\AndroidService::class,
-			Services\APNS\ApnService::class,
+	private $services = [
+			DeveloperDynamo\PushNotification\Services\GCM\AndroidService::class,
+			DeveloperDynamo\PushNotification\Services\APNS\ApnService::class,
 	];
 	
 	/**
@@ -60,7 +60,7 @@ class PushNotificationBridge
 	 * @param string $platform
 	 * @param array $tokens is an array [platform:'xxx', registration_id:'xxxxxx']
 	 */
-	protected function dispatchDeviceToken($platform, $tokens)
+	private function dispatchDeviceToken($platform, $tokens)
 	{
 		$platform_tokens = [];
 			

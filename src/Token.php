@@ -4,15 +4,12 @@ namespace DeveloperDynamo\PushNotification;
 
 class Token
 {
-	public $id;
-	
 	public $platform;
 	
 	public $deviceId;
 
-	public function __construct($id, $platform, $deviceId)
+	public function __construct($platform, $deviceId)
 	{
-		$this->id = $id;
 		$this->platform = $platform;
 		$this->deviceId = $deviceId;
 	}
@@ -20,7 +17,6 @@ class Token
 	public function toArray()
 	{
 		return [
-				'id' => $this->id,
 				'platform' => $this->platform,
 				'deviceId' => $this->deviceId,
 		];
