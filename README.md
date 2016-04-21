@@ -15,10 +15,7 @@ Update composer with command:
 "composer update"
 
 #Add Notification Provider in Laravel 5
-Like all providers, add them to your config/app.php.
+Like all providers, add them to your config/app.php
 
-/*
- * Push Notification Service Providers
- */
 'DeveloperDynamo\PushNotification\PushNotificationProvider',
  
