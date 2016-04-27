@@ -33,3 +33,15 @@ Run follow composer command:
 
 php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNotificationProvider"
 
+#Send push notification
+
+###Regular sending
+NotificationBridge::send(AbstractPayload $payload, array $tokens);
+
+###Queue push sending 
+You can queue your push notification sending to improve your system performace
+
+NotificationBridge::queue(AbstractPayload $payload, array $tokens, "queue-name");
+
+With latest parameter you can shedule job in a specific queue. 
+

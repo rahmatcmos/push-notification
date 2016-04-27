@@ -31,7 +31,7 @@ class PushNotificationProvider extends ServiceProvider
     	$this->mergeConfigFrom( __DIR__.'/config/pushnotification.php', 'pushnotification');
     	
     	$this->app['bridge'] = $this->app->share(function($app) {
-    		return new PushNotificationBridge();
+    		return new PushNotificationBridge($app);
     	});
     }
 }

@@ -18,6 +18,60 @@ class PushNotificationBridge
 	];
 	
 	/**
+	 * Instance of queue connection
+	 * 
+	 * @var Queue
+	 */
+	protected $queue;
+	
+	/**
+	 * Instance of laravel App
+	 * 
+	 * @var App
+	 */
+	protected $app;
+	
+	/**
+	 * Create a new Mailer instance.
+	 * 
+	 * @param AbstractPayload $payload
+	 * @param array $tokens
+	 * @param string $queue
+	 */
+	public function __construct($app)
+	{
+		$this->app = $app;
+		$this->setBridgeDependencies();
+	}
+	
+	/**
+	 * Queue a new push notification for sending.
+	 * 
+	 * @param AbstractPayload $payload
+	 * @param array $tokens
+	 * @param string $queue
+	 */
+	public function queue(AbstractPayload $payload, array $tokens, $queue = null)
+	{
+		return $this->queue->push('bridge@handleQueuedSending', compact($payload, $tokens), $queue);
+	}
+	
+	/**
+	 * Handle a queued push notification message job.
+	 * 
+	 * @param \Illuminate\Contracts\Queue\Job  $job
+	 * @param DeveloperDynamo\PushNotification\Payload\AbstractPayload $payload
+	 * @param array<DeveloperDynamo\PushNotification\Token> $tokens
+     * @return void
+	 */
+	public function handleQueuedSending($job, $data)
+	{
+		$this->send($data['payload'], $data['tokens']);
+		
+		$job->delete();
+	}
+	
+	/**
 	 * Send notification to devices tokens
 	 * 
 	 * @throws \Exception
@@ -60,7 +114,7 @@ class PushNotificationBridge
 	 * @param string $platform
 	 * @param array $tokens is an array [platform:'xxx', registration_id:'xxxxxx']
 	 */
-	private function dispatchDeviceToken($platform, $tokens)
+	protected function dispatchDeviceToken($platform, $tokens)
 	{
 		$platform_tokens = [];
 			
@@ -76,5 +130,18 @@ class PushNotificationBridge
 		}
 		
 		return $platform_tokens;
+	}
+	
+	/**
+	 * Set a few dependencies on the bridge instance.
+	 * 
+     * @return void
+	 */
+	protected function setBridgeDependencies() 
+	{
+		//if you want to see if a class is bound to the container you can use BOUND method
+		if ($this->app->bound('queue')) {
+			$this->queue = $this->app['queue.connection'];
+		}
 	}
 }
