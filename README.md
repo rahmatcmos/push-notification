@@ -68,7 +68,7 @@ foreach ($list as $item){
 }
 
 //send directly
-NotificationBridge::send(AbstractPayload $payload, array $tokens);
+NotificationBridge::send(AbstractPayload $payload, array $bridgeTokens);
 ```
 
 ###Queue push sending 
@@ -85,7 +85,7 @@ foreach ($list as $item){
 }
 
 //push in queue
-NotificationBridge::queue(AbstractPayload $payload, array $tokens, "queue-name");
+NotificationBridge::queue(AbstractPayload $payload, array $bridgeTokens, "queue-name");
 ```
 
 With latest parameter you can shedule job in a specific queue. 
