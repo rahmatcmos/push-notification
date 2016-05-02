@@ -32,6 +32,9 @@ class ApnService extends AbstractClient implements ServiceInterface
     	if(!count($tokens)>0)
     		return true;
 
+		//Open connection
+		$this->connect();
+
 		// Encode payload as JSON
 		$json_payload = json_encode($payload->getIosFormat());
 		
@@ -42,7 +45,6 @@ class ApnService extends AbstractClient implements ServiceInterface
 		}
 		
 		// Send data to the server
-		$this->connect();
 		return $this->write($data);
 	}
 	

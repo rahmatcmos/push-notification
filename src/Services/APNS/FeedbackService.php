@@ -2,10 +2,10 @@
 
 namespace DeveloperDynamo\PushNotification\Services\APNS;
 
-class APNSFeedbackDriver extends AbstractClient
+class FeedbackService extends AbstractClient
 {
 	/**
-	 * APNS feedback service URI
+	 * override $uri with APNS feedback service URI
 	 * 
 	 * @var string
 	 */
@@ -18,9 +18,7 @@ class APNSFeedbackDriver extends AbstractClient
 	 */
 	public function feedback()
 	{
-		if (!$this->isConnected()) {
-			throw new Exception('You must first open the connection by calling connect()');
-		}
+		$this->connect();
 		
 		/*
 		 * Read from socket

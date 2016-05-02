@@ -119,6 +119,16 @@ class AbstractClient
 		
 		return fwrite($this->socket, $payload, strlen($payload));
 	}
+	
+    /**
+     * Is Connected
+     *
+     * @return boolean
+     */
+    public function isConnected()
+    {
+        return $this->isConnected;
+    }
 
 	/**
 	 * Destructor
