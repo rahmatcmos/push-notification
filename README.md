@@ -1,7 +1,18 @@
 # push-notification
-Extensible Laravel package to send push notification across all platform
+With Developer Dynamo Push Notification you can send millions messages to millions devices with one line of code.
 
-#Platform actually supported
+This package exploit the best Laravel features to execute very expensive tasks in terms of system resources as sending massive push notification messages.
+
+All of this features are masked to you that you can use always only one line of code.
+
+###Queue support
+With Queue you can delegate sending task to an external Queue service as Amazon SQS to drastically increase your application performace without any change of your codebase.
+
+This is not the same thing to delegate push notification management, but delegate only tasks execution, eg. sending Email, execute job, and now send push notification.
+
+Furthermore sending notifications for iOS devices have a specific treatment concerning behavior of Apple APN service. It’s also available an interface for Apple Feedback server to verify which tokens are invalid in your DB and remove them from your archive to prevent failed sending.
+
+###Platform actually supported
 - iOS - apns (Apple Push Notificatio Service)
 - android - GCM (Google Cloud Messaging)
 

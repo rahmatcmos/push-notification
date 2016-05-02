@@ -95,15 +95,6 @@ abstract class AbstractPayload implements \ArrayAccess
 		 */
 		$payload = array_merge($payload, $this->getCustomPayload());
 		
-		/*
-		 * Set large icon for android notification
-		 */
-		if($this->getAttribute('img') && strpos($this->getAttribute('img'), '://'))
-			$payload['image'] = $this->getAttribute('img');
-		
-		else if($this->getAttribute('img') && !strpos($this->getAttribute('img'), '://'))
-			$payload['image'] = "http://www.checkit-mobile.it/".$this->getAttribute('img');
-		
 		return $payload;
 	}
 	
