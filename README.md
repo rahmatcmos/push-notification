@@ -1,4 +1,7 @@
 # push-notification
+
+For complete introduction see this article: [Developer Dynamo](http://developerdynamo.it/2016/05/01/super-powerfull-laravel-pushnotification-package/)
+
 With Developer Dynamo Push Notification you can send millions messages to millions devices with one line of code.
 
 This package exploit the best Laravel features to execute very expensive tasks in terms of system resources as sending massive push notification messages.
