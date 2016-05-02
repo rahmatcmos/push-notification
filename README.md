@@ -58,6 +58,16 @@ php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNoti
 
 ###Regular sending
 ```
+//Using Eloquent
+$list = YourPushTokenTable::all();
+ 
+//Create list for NotificationBridge
+$bridgeTokens = [];
+foreach ($list as $item){
+    $bridgeTokens[] = new Token($item->platform, $item->device_token);
+}
+
+//send directly
 NotificationBridge::send(AbstractPayload $payload, array $tokens);
 ```
 
@@ -65,6 +75,16 @@ NotificationBridge::send(AbstractPayload $payload, array $tokens);
 You can queue your push notification sending to improve your system performace
 
 ```
+//Using Eloquent
+$list = YourPushTokenTable::all();
+ 
+//Create list for NotificationBridge
+$bridgeTokens = [];
+foreach ($list as $item){
+    $bridgeTokens[] = new Token($item->platform, $item->device_token);
+}
+
+//push in queue
 NotificationBridge::queue(AbstractPayload $payload, array $tokens, "queue-name");
 ```
 
