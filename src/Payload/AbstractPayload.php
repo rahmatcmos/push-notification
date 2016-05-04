@@ -47,6 +47,8 @@ abstract class AbstractPayload implements \ArrayAccess
 	{
 		$this->checkMandatoryFields();
 		
+		$this->applyRawFilter();
+		
 		/*
 		 * Create standard payload for specific platform
 		 */
@@ -77,6 +79,8 @@ abstract class AbstractPayload implements \ArrayAccess
 	public function getAndroidFormat()
 	{
 		$this->checkMandatoryFields();
+		
+		$this->applyRawFilter();
 		
 		/*
 		 * Create standard payload for specific platform
@@ -132,6 +136,17 @@ abstract class AbstractPayload implements \ArrayAccess
 		}
 		
 		return $custom;
+	}
+	
+	public function applyRawFilter()
+	{
+		foreach ($this->attributes as $key => $value){
+			$this->attributes[$key] = strip_tags($value);
+		}
+		
+		foreach($this->custom as $key => $value){
+			$this->custom[$key] = strip_tags($value);
+		}
 	}
 
     /**
