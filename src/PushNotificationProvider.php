@@ -3,6 +3,7 @@
 namespace DeveloperDynamo\PushNotification;
 
 use Illuminate\Support\ServiceProvider;
+use DeveloperDynamo\PushNotification\Services\APNS\FeedbackService;
 
 class PushNotificationProvider extends ServiceProvider
 {
@@ -32,6 +33,10 @@ class PushNotificationProvider extends ServiceProvider
     	
     	$this->app['bridge'] = $this->app->share(function($app) {
     		return new PushNotificationBridge($app);
+    	});
+    	
+    	$this->app['feedback'] = $this->app->share(function() {
+    		return new FeedbackService();
     	});
     }
 }
