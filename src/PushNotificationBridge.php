@@ -53,7 +53,7 @@ class PushNotificationBridge
 	 */
 	public function queue(AbstractPayload $payload, array $tokens, $queue = null)
 	{
-		return $this->queue->push('bridge@handleQueuedSending', compact($payload, $tokens), $queue);
+		return $this->queue->push('bridge@handleQueuedSending', ['payload'=>$payload, 'tokens'=>$tokens], $queue);
 	}
 	
 	/**
