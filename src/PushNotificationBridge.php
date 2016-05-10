@@ -20,7 +20,7 @@ class PushNotificationBridge
 	/**
 	 * Instance of queue connection
 	 * 
-	 * @var Queue
+	 * @var \Illuminate\Contracts\Queue\Queue
 	 */
 	protected $queue;
 	
@@ -53,7 +53,10 @@ class PushNotificationBridge
 	 */
 	public function queue(AbstractPayload $payload, array $tokens, $queue = null)
 	{
-		return $this->queue->push('bridge@handleQueuedSending', ['payload'=>$payload, 'tokens'=>$tokens], $queue);
+		$payload = serialize($payload);
+		$tokens = serialize($tokens);
+		
+		return $this->queue->push('bridge@handleQueuedSending', compact('payload', 'tokens'), $queue);
 	}
 	
 	/**
@@ -66,7 +69,10 @@ class PushNotificationBridge
 	 */
 	public function handleQueuedSending($job, $data)
 	{
-		$this->send($data['payload'], $data['tokens']);
+		$payload = unserialize($data['payload']);
+		$tokens = unserialize($data['tokens']);
+		
+		$this->send($payload, $tokens);
 		
 		$job->delete();
 	}
@@ -80,30 +86,20 @@ class PushNotificationBridge
 	 */
 	public function send(AbstractPayload $payload, array $tokens)
 	{
-		/*
-		 * Retrieve drivers and cast to DriverInterface
-		 */
+		//Retrieve drivers and cast to DriverInterface
 		foreach($this->services as $service){
-			/*
-			 * Create driver instance
-			 */
+			//Create driver instance
 			$instance = new $service();
 
-			/*
-			 * Check instance type
-			 */
+			//Check instance type
 			if(! $instance instanceof ServiceInterface){
-				throw new \InvalidArgumentException("Driver must be a DriverInterface implementation");
+				throw new \InvalidArgumentException("Service must be a ServiceInterface implementation");
 			}
 			
-			/*
-			 * Retrieve tokens for specific driver's platform
-			 */
+			//Retrieve tokens for specific driver's platform
 			$platform_tokens = $this->dispatchDeviceToken($instance->getPlatformName(), $tokens);
 			
-			/*
-			 * Send payload to tokens across driver's platform
-			 */
+			//Send payload to tokens across driver's platform
 			$instance->send($payload, $platform_tokens);
 		}
 	}
