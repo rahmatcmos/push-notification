@@ -57,7 +57,7 @@ You should have a model to store devices informations into your database, for ex
 ```
 class YourPushTokenTable extends Model
 {
-    protected $table = "push_tokens_table";
+    //
 }
 ```
 
@@ -68,8 +68,6 @@ use DeveloperDynamo\PushNotification\TokenTrait;
 class YourPushTokenTable extends Model
 {
     use TokenTrait;
-
-    protected $table = 'push_tokens_table';
 }
 ```
 
