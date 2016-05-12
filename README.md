@@ -131,7 +131,7 @@ class InsertPostPayload extends Payload
 	}
 }
 ```
-
+In this way you can create your payload collection for every events or message relevant for your users.
 
 #Send example
 Ok, now you can get lists of devices tokens from your DB and you can create a payload for specifics events.
