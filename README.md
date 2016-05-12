@@ -97,7 +97,7 @@ class YourPushTokenTable extends Model
 In this way you can retrieve list of tokens directly from your DB table with Eloquent benefits and send your payload across all platforms without any other intermediate steps.
 
 #Create your payload
-You just create a class for each event's payload and implement `DeveloperDynamo\PushNotification\Contracts\Payload` to overwrite `iosPayload` and `androidPayload` properties.
+You just create a class that implement `DeveloperDynamo\PushNotification\Contracts\Payload` and overwrite `iosPayload` and `androidPayload` properties with your payload content.
 
 ```php
 namespace App\Payloads;
@@ -131,7 +131,7 @@ class InsertPostPayload extends Payload
 	}
 }
 ```
-In this way you can create your payload collection for every events or message relevant for your users.
+In this way you can create your payload collection for every events or message that you want send to your users.
 
 #Send example
 Ok, now you can get lists of devices tokens from your DB and you can create a payload for specifics events.
