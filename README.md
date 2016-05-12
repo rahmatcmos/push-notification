@@ -5,7 +5,7 @@ With Developer Dynamo Push Notification you can send millions messages to millio
 
 This package exploit the best Laravel features to execute very expensive tasks in terms of system resources as sending massive push notification messages.
 
-All of this features are masked to you that you can use always only one line of code.
+You can use directly your Eloquent model to filter your token list and send your payload 
 
 ###Queue support
 With Queue you can delegate sending task to an external Queue service as Amazon SQS to drastically increase your application performace without any change of your codebase.
