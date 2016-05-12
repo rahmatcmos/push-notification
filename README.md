@@ -97,7 +97,7 @@ class YourPushTokenTable extends Model
 In this way you can retrieve list of tokens directly from your DB table with Eloquent benefits and send your payload across all platforms without any other intermediate steps.
 
 #Create your payload
-You just create a class for each event's payload and implement `DeveloperDynamo\PushNotification\Contracts\Payload`.
+You just create a class for each event's payload and implement `DeveloperDynamo\PushNotification\Contracts\Payload` to overwrite `iosPayload` and `androidPayload` properties.
 
 ```php
 namespace App\Payloads;
