@@ -131,14 +131,15 @@ class InsertPostPayload extends Payload
 	}
 }
 ```
-When you put this payload class in `NotificationBridge` it automatically verify the format according with APNS and GCM requirements.
+
 
 #Send example
+Ok, now you can get lists of devices tokens from your DB and you can create a payload for specifics events notifications.
+To sending payload to list of devices tokens you can use `NotificationBridge`
 
 ###Regular sending
 ```
-//AddPhotoPayload extends DeveloperDynamo\PushNotification\Contracts\Payload
-$payload = new AddPhotoPayload();
+$payload = new InsertPostPayload(Post::find($id));
 
 //Eloquent model that use TokenTrait
 $tokens = YourPushTokenTable::all();
@@ -152,8 +153,7 @@ NotificationBridge::send($payload, $tokens);
 You can use queue to sending push notifications to improve your system performace
 
 ```
-//AddPhotoPayload extends DeveloperDynamo\PushNotification\Contracts\Payload
-$payload = new AddPhotoPayload();
+$payload = new InsertPostPayload(Post::find($id));
 
 //Eloquent model that use TokenTrait
 $tokens = YourPushTokenTable::all();
