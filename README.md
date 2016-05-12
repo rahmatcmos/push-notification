@@ -124,7 +124,7 @@ class InsertPostPayload extends AbstractPayload
 	}
 }
 ```
-When you put this payload class in `NotificationBridge` it will be automatically converted in specific platform format for APNS and GCM requirements.
+When you put this payload class in `NotificationBridge` it will be automatically converted in specific platform format according APNS and GCM requirements.
 
 #Send example
 
