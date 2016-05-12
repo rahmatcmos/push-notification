@@ -134,7 +134,7 @@ class InsertPostPayload extends Payload
 
 
 #Send example
-Ok, now you can get lists of devices tokens from your DB and you can create a payload for specifics events notifications.
+Ok, now you can get lists of devices tokens from your DB and you can create a payload for specifics events.
 To sending payload to list of devices tokens you can use `NotificationBridge`
 
 ###Regular sending
