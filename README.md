@@ -96,6 +96,36 @@ class YourPushTokenTable extends Model
 
 In this way you can retrieve list of tokens directly from your DB table with Eloquent benefits and send your payload across all platforms without any other intermediate steps.
 
+#Create your payload
+You just create a class for each event's payload and implement `DeveloperDynamo\PushNotification\Payload\AbstractPayload`. Keep in consideration that are only two mandatory params inherited from AbstractPayload: `title` and `content`
+
+```
+namespace App\Payloads;
+
+use App\Post;
+use DeveloperDynamo\PushNotification\Payload\AbstractPayload;
+
+class InsertPostPayload extends AbstractPayload
+{
+	/**
+	 * Generate Notification Payload for Add Post event
+	 *
+	 * @param Post $post
+	 * @return \App\PushNotification\Payload
+	 */
+	public function __construct(Post $post)
+	{
+		//mandatory
+        $this->title = $post->title;
+        $this->content = $post->content;
+        
+        //Other payload information
+        $this->image = $post->photo_url;
+	}
+}
+```
+When you put this payload class in `NotificationBridge` it will be automatically converted in specific platform format for APNS and GCM requirements.
+
 #Send example
 
 ###Regular sending
