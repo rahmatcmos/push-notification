@@ -73,9 +73,9 @@ class YourPushTokenTable extends Model
 
 To works automatically with PushNotification Package your table needs two columns, one that contains platform name, and the other one that contains device token.
 
-By default this two columns name are cosidered `"platform"` and `"device_token"`, but if your table on DB used different names you can customize them according with your table's structure.
+By default this two columns name are cosidered `"platform"` and `"device_token"`, but if your table on DB use different names you can customize them according with your table's structure.
 
-For example, in your table you have platform column named "os", and column to store device_token is named "token". You can override standard name used from package using `$columnName` property:
+For example, in your table you have platform column named "os", and column to store device_token is named "token". You can overwrite standard name used from package using `$columnName` property:
 
 ```
 class YourPushTokenTable extends Model
@@ -96,10 +96,13 @@ class YourPushTokenTable extends Model
 
 In this way you can retrieve list of tokens directly from your DB table with Eloquent benefits and send your payload across all platforms without any other intermediate steps.
 
-#Send push notification
+#Send example
 
 ###Regular sending
 ```
+//AddPhotoPayload extends DeveloperDynamo\PushNotification\Payload\AbstractPayload
+$payload = new AddPhotoPayload();
+
 //Eloquent model with TokenTrait
 $tokens = YourPushTokenTable::all();
 
@@ -112,6 +115,9 @@ NotificationBridge::send(AbstractPayload $payload, $tokens);
 You can queue your push notification sending to improve your system performace
 
 ```
+//AddPhotoPayload extends DeveloperDynamo\PushNotification\Payload\AbstractPayload
+$payload = new AddPhotoPayload();
+
 //Eloquent model with TokenTrait
 $tokens = YourPushTokenTable::all();
 
