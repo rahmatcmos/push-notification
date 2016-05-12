@@ -17,27 +17,27 @@ With Queue you can delegate sending task to an external Queue service as Amazon 
 #Install
 Add follow line into "require" section in your composer.json:
 
-```
+```json
 "developerdynamo/push-notification": "1.*"
 ```
 
 Update composer with command:
 
-```
+```json
 "composer update"
 ```
 
 ###Provider and Facade
 Like all providers, put this follow lines in your config/app.php
 
-```
+```php
 'providers' => [
 	...
 	DeveloperDynamo\PushNotification\PushNotificationProvider::class,
 ],
 ```
 
-```
+```php
 'aliases' => [
 	...
 	'NotificationBridge' => DeveloperDynamo\PushNotification\Facades\PushNotificationBridge::class,
@@ -48,13 +48,13 @@ Like all providers, put this follow lines in your config/app.php
 Finally you need to generate a configuration file for this package.
 Run follow composer command:
 
-```
+```php
 php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNotificationProvider"
 ```
 
 #Quick start
 You should have a model to store devices informations into your database, for example: 
-```
+```php
 class YourPushTokenTable extends Model
 {
     //
@@ -62,7 +62,7 @@ class YourPushTokenTable extends Model
 ```
 
 To fit your model to be used directly from PushNotification Package you simply need to attach our Trait:
-```
+```php
 use DeveloperDynamo\PushNotification\TokenTrait;
 
 class YourPushTokenTable extends Model
@@ -77,7 +77,7 @@ By default this two columns name are cosidered `"platform"` and `"device_token"`
 
 For example, in your table you have platform column named "os", and column to store device_token is named "token". You can overwrite standard name used from package using `$columnName` property:
 
-```
+```php
 class YourPushTokenTable extends Model
 {
     use TokenTrait;
@@ -99,7 +99,7 @@ In this way you can retrieve list of tokens directly from your DB table with Elo
 #Create your payload
 You just create a class for each event's payload and implement `DeveloperDynamo\PushNotification\Contracts\Payload`.
 
-```
+```php
 namespace App\Payloads;
 
 use App\Post;
@@ -138,7 +138,7 @@ Ok, now you can get lists of devices tokens from your DB and you can create a pa
 To sending payload to list of devices tokens you can use `NotificationBridge`
 
 ###Regular sending
-```
+```php
 $payload = new InsertPostPayload(Post::find($id));
 
 //Eloquent model that use TokenTrait
@@ -152,7 +152,7 @@ NotificationBridge::send($payload, $tokens);
 ###Queue push sending 
 You can use queue to sending push notifications to improve your system performace
 
-```
+```php
 $payload = new InsertPostPayload(Post::find($id));
 
 //Eloquent model that use TokenTrait
