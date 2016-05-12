@@ -4,6 +4,7 @@ namespace DeveloperDynamo\PushNotification;
 
 use DeveloperDynamo\PushNotification\Payload\AbstractPayload;
 use DeveloperDynamo\PushNotification\Services\ServiceInterface;
+use Illuminate\Support\Facades\Log;
 
 class PushNotificationBridge
 {
@@ -51,7 +52,7 @@ class PushNotificationBridge
 	 * @param array $tokens
 	 * @param string $queue
 	 */
-	public function queue(AbstractPayload $payload, array $tokens, $queue = null)
+	public function queue(AbstractPayload $payload, $tokens, $queue = null)
 	{
 		$payload = serialize($payload);
 		$tokens = serialize($tokens);
@@ -82,16 +83,16 @@ class PushNotificationBridge
 	 * 
 	 * @throws \Exception
 	 * @param AbstractPayload $payload
-	 * @param array<Token> $tokens
+	 * @param array<Model> $tokens
 	 */
-	public function send(AbstractPayload $payload, array $tokens)
+	public function send(AbstractPayload $payload, $tokens)
 	{
 		//Retrieve drivers and cast to DriverInterface
 		foreach($this->services as $service){
-			//Create driver instance
+			//Create service instance
 			$instance = new $service();
 
-			//Check instance type
+			//Check instance type to use our standard interface
 			if(! $instance instanceof ServiceInterface){
 				throw new \InvalidArgumentException("Service must be a ServiceInterface implementation");
 			}
@@ -105,7 +106,7 @@ class PushNotificationBridge
 	}
 	
 	/**
-	 * Dispatch tokens in the specific list for passed platform
+	 * Create 1D array for specific platform processed
 	 * 
 	 * @param string $platform
 	 * @param array $tokens is an array [platform:'xxx', registration_id:'xxxxxx']
@@ -115,17 +116,38 @@ class PushNotificationBridge
 		$platform_tokens = [];
 			
 		foreach($tokens as $tk){
-			//If tokens is array<Model>
-			if(!$tk instanceof Token)
+			//Check TokenTrait to use our standard interface
+			if( ! $this->hasTokenTrait($tk)){
 				continue;
+			}
 			
+			//Use trait method
+			$tk = $tk->getTokenArray();
+				
 			//filtering tokens
-			if($tk->platform === $platform){
-				$platform_tokens[] = $tk->deviceId;
+			if($tk['platform'] === $platform){
+				$platform_tokens[] = $tk['device_token'];
 			}
 		}
 		
 		return $platform_tokens;
+	}
+	
+	/**
+	 * Check if given class use TokenTrait
+	 * 
+	 * @param string $name
+	 * @return boolean
+	 */
+	protected function hasTokenTrait($tk)
+	{
+		foreach( class_uses( $tk ) as $t ) {
+			if( $t === 'DeveloperDynamo\PushNotification\TokenTrait' ){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	/**
