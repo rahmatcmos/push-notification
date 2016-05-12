@@ -2,9 +2,8 @@
 
 namespace DeveloperDynamo\PushNotification;
 
-use DeveloperDynamo\PushNotification\Payload\AbstractPayload;
+use DeveloperDynamo\PushNotification\Contracts\Payload;
 use DeveloperDynamo\PushNotification\Services\ServiceInterface;
-use Illuminate\Support\Facades\Log;
 
 class PushNotificationBridge
 {
@@ -52,7 +51,7 @@ class PushNotificationBridge
 	 * @param array $tokens
 	 * @param string $queue
 	 */
-	public function queue(AbstractPayload $payload, $tokens, $queue = null)
+	public function queue(Payload $payload, $tokens, $queue = null)
 	{
 		$payload = serialize($payload);
 		$tokens = serialize($tokens);
@@ -85,7 +84,7 @@ class PushNotificationBridge
 	 * @param AbstractPayload $payload
 	 * @param array<Model> $tokens
 	 */
-	public function send(AbstractPayload $payload, $tokens)
+	public function send(Payload $payload, $tokens)
 	{
 		//Retrieve drivers and cast to DriverInterface
 		foreach($this->services as $service){

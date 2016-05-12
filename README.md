@@ -97,64 +97,72 @@ class YourPushTokenTable extends Model
 In this way you can retrieve list of tokens directly from your DB table with Eloquent benefits and send your payload across all platforms without any other intermediate steps.
 
 #Create your payload
-You just create a class for each event's payload and implement `DeveloperDynamo\PushNotification\Payload\AbstractPayload`. Keep in consideration that are only two mandatory params inherited from AbstractPayload: `title` and `content`
+You just create a class for each event's payload and implement `DeveloperDynamo\PushNotification\Contracts\Payload`.
 
 ```
 namespace App\Payloads;
 
 use App\Post;
-use DeveloperDynamo\PushNotification\Payload\AbstractPayload;
+use DeveloperDynamo\PushNotification\Contracts\Payload;
 
 //AbstractPayload add array capability to your class
-class InsertPostPayload extends AbstractPayload
+class InsertPostPayload extends Payload
 {
 	/**
 	 * Generate Notification Payload for Add Post event
 	 *
 	 * @param Post $post
-	 * @return \App\PushNotification\Payload
+	 * @return void
 	 */
 	public function __construct(Post $post)
 	{
-		//mandatory
-        $this->title = $post->title;
-        $this->content = $post->content;
-        
-        //Other payload information
-        $this->image = $post->photo_url;
+		//IOS payload format	
+		$this->iosPayload = [
+				"alert" => [
+					"title" => $post->title,
+					"body" 	=> $post->content,
+				],
+		];
+		
+		//Android payload format
+		$this->androidPayload = [
+				"title" 	=> $post->title,
+				"message" 	=> $post->content,
+				"image" 	=> "http://www.checkit-mobile.it/".$post->photo,
+		];
 	}
 }
 ```
-When you put this payload class in `NotificationBridge` it will be automatically converted in specific platform format according APNS and GCM requirements.
+When you put this payload class in `NotificationBridge` it automatically verify the format according with APNS and GCM requirements.
 
 #Send example
 
 ###Regular sending
 ```
-//AddPhotoPayload extends DeveloperDynamo\PushNotification\Payload\AbstractPayload
+//AddPhotoPayload extends DeveloperDynamo\PushNotification\Contracts\Payload
 $payload = new AddPhotoPayload();
 
-//Eloquent model with TokenTrait
+//Eloquent model that use TokenTrait
 $tokens = YourPushTokenTable::all();
 
 //send directly
 //$tokens needs to be an array
-NotificationBridge::send(AbstractPayload $payload, $tokens);
+NotificationBridge::send($payload, $tokens);
 ```
 
 ###Queue push sending 
-You can queue your push notification sending to improve your system performace
+You can use queue to sending push notifications to improve your system performace
 
 ```
-//AddPhotoPayload extends DeveloperDynamo\PushNotification\Payload\AbstractPayload
+//AddPhotoPayload extends DeveloperDynamo\PushNotification\Contracts\Payload
 $payload = new AddPhotoPayload();
 
-//Eloquent model with TokenTrait
+//Eloquent model that use TokenTrait
 $tokens = YourPushTokenTable::all();
 
 //push in queue
 //$tokens needs to be an array
-NotificationBridge::queue(AbstractPayload $payload, $tokens, "queue-name");
+NotificationBridge::queue($payload, $tokens, "queue-name");
 ```
 
 With latest parameter you can schedule job in a specific queue. 

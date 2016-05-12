@@ -4,7 +4,7 @@ namespace DeveloperDynamo\PushNotification\Services\GCM;
 
 use Config;
 use DeveloperDynamo\PushNotification\Services\ServiceInterface;
-use DeveloperDynamo\PushNotification\Payload\AbstractPayload;
+use DeveloperDynamo\PushNotification\Contracts\Payload;
 
 class AndroidService implements ServiceInterface
 {
@@ -31,7 +31,7 @@ class AndroidService implements ServiceInterface
 	 */
 	public function send($payload, $tokens)
 	{
-		if (!($payload instanceof AbstractPayload)) {
+		if (!($payload instanceof Payload)) {
 			throw new \InvalidArgumentException('Payload must be an instance of AbstractPayload');
 		}
 		

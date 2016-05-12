@@ -3,7 +3,7 @@
 namespace DeveloperDynamo\PushNotification\Services\APNS;
 
 use DeveloperDynamo\PushNotification\Services\ServiceInterface;
-use DeveloperDynamo\PushNotification\Payload\AbstractPayload;
+use DeveloperDynamo\PushNotification\Contracts\Payload;
 
 class ApnService extends AbstractClient implements ServiceInterface
 {
@@ -25,10 +25,15 @@ class ApnService extends AbstractClient implements ServiceInterface
 	 * Send notification to devices tokens
 	 *
 	 * @throws InvalidArgumentException
-	 * @param AbstractPayload $payload
+	 * @param Payload $payload
 	 * @param array $tokens
 	 */
-	public function send($payload, $tokens){
+	public function send($payload, $tokens)
+	{
+		if (!($payload instanceof Payload)) {
+			throw new \InvalidArgumentException('Payload must be an instance of AbstractPayload');
+		}
+		
     	if(!count($tokens)>0)
     		return true;
 
