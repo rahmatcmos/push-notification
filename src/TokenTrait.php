@@ -3,7 +3,7 @@
 namespace DeveloperDynamo\PushNotification;
 
 use PhpParser\Node\Expr\Array_;
-use Illuminate\Support\Facades\Log;
+
 trait TokenTrait
 {
 	/**
