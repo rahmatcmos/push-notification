@@ -31,7 +31,7 @@ Update composer with command:
 "composer update"
 ```
 
-#Configure Laravel 5
+###Provider and Facade
 Like all providers, put this follow lines in your config/app.php
 
 ```
@@ -48,7 +48,7 @@ Like all providers, put this follow lines in your config/app.php
 ],
 ```
 
-#Configuration
+###Configuration
 Finally you need to generate a configuration file for this package.
 Run follow composer command:
 
@@ -57,7 +57,7 @@ php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNoti
 ```
 
 #Quick start
-You should have a model to store devices informations into the database, for example: 
+You should have a model to store devices informations into your database, for example: 
 ```
 class YourPushTokenTable extends Model
 {
@@ -65,7 +65,7 @@ class YourPushTokenTable extends Model
 }
 ```
 
-To fit your model to be used with PushNotification Package you simply need to attach our Trait:
+To fit your model to be used directly from PushNotification Package you simply need to attach our Trait:
 ```
 use DeveloperDynamo\PushNotification\TokenTrait;
 
@@ -81,7 +81,7 @@ To works automatically with PushNotification Package your table needs two column
 
 By default this two columns name are cosidered `"platform"` and `"device_token"`, but if your table on DB used different names you can customize them.
 
-For example, in your table you have platform column named "os", and column to store device_token is named "token" you can override standard name used from package with `$columnName` property:
+For example, in your table you have platform column named "os", and column to store device_token is named "token". You can override standard name used from package using `$columnName` property:
 
 ```
 class YourPushTokenTable extends Model
@@ -100,7 +100,7 @@ class YourPushTokenTable extends Model
 }
 ```
 
-In this way you can retrieve list of tokens directly from your DB table and send your payload across all platforms without any other intermediate steps.
+In this way you can retrieve list of tokens directly from your DB table with Eloquent benefits and send your payload across all platforms without any other intermediate steps.
 
 #Send push notification
 
