@@ -48,7 +48,7 @@ Like all providers, put this follow lines in your config/app.php
 ],
 ```
 
-#Publish configuration
+#Configuration
 Finally you need to generate a configuration file for this package.
 Run follow composer command:
 
@@ -56,39 +56,75 @@ Run follow composer command:
 php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNotificationProvider"
 ```
 
+#Quick start
+You should have a model to store devices informations into the database, for example: 
+```
+class YourPushTokenTable extends Model
+{
+    protected $table = "push_tokens_table";
+}
+```
+
+To fit your model to be used with PushNotification Package you simply need to attach our Trait:
+```
+use DeveloperDynamo\PushNotification\TokenTrait;
+
+class YourPushTokenTable extends Model
+{
+    use TokenTrait;
+
+    protected $table = 'push_tokens_table';
+}
+```
+
+To works automatically with PushNotification Package your table needs two columns, one that contain platform name, and the other one that contain device token.
+
+By default this two columns name are cosidered `"platform"` and `"device_token"`, but if your table on DB used different names you can customize them.
+
+For example, in your table you have platform column named "os", and column to store device_token is named "token" you can override standard name used from package with `$columnName` property:
+
+```
+class YourPushTokenTable extends Model
+{
+    use TokenTrait;
+    
+    /**
+	 * Column name into DB table to store device information
+	 * 
+	 * @var array
+	 */
+	protected $columnName = [
+			"platform" => "os",
+			"device_token" => "token",
+	];
+}
+```
+
+In this way you can retrieve list of tokens directly from your DB table and send your payload across all platforms without any other intermediate steps.
+
 #Send push notification
 
 ###Regular sending
 ```
-//Using Eloquent
-$list = YourPushTokenTable::all();
- 
-//Create list for NotificationBridge
-$bridgeTokens = [];
-foreach ($list as $item){
-    $bridgeTokens[] = new Token($item->platform, $item->device_token);
-}
+//Eloquent model with TokenTrait
+$tokens = YourPushTokenTable::all();
 
 //send directly
-NotificationBridge::send(AbstractPayload $payload, array $bridgeTokens);
+//$tokens needs to be an array
+NotificationBridge::send(AbstractPayload $payload, $tokens);
 ```
 
 ###Queue push sending 
 You can queue your push notification sending to improve your system performace
 
 ```
-//Using Eloquent
-$list = YourPushTokenTable::all();
- 
-//Create list for NotificationBridge
-$bridgeTokens = [];
-foreach ($list as $item){
-    $bridgeTokens[] = new Token($item->platform, $item->device_token);
-}
+//Eloquent model with TokenTrait
+$tokens = YourPushTokenTable::all();
 
 //push in queue
-NotificationBridge::queue(AbstractPayload $payload, array $bridgeTokens, "queue-name");
+//$tokens needs to be an array
+NotificationBridge::queue(AbstractPayload $payload, $tokens, "queue-name");
 ```
 
-With latest parameter you can shedule job in a specific queue. 
+With latest parameter you can schedule job in a specific queue. 
 

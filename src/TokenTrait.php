@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 trait TokenTrait
 {
 	/**
-	 * Column name into DB table for store device information
+	 * Column name into DB table to store device information
 	 * 
 	 * @var array
 	 */
