@@ -105,6 +105,7 @@ namespace App\Payloads;
 use App\Post;
 use DeveloperDynamo\PushNotification\Payload\AbstractPayload;
 
+//AbstractPayload add array capability to your class
 class InsertPostPayload extends AbstractPayload
 {
 	/**
