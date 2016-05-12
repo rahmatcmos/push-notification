@@ -119,14 +119,14 @@ class InsertPostPayload extends Payload
 		$this->iosPayload = [
 				"alert" => [
 					"title" => $post->title,
-					"body" 	=> $post->content,
+					"body" 	=> $post->sub_title,
 				],
 		];
 		
 		//Android payload format
 		$this->androidPayload = [
 				"title" 	=> $post->title,
-				"message" 	=> $post->content,
+				"message" 	=> $post->sub_title,
 		];
 	}
 }
