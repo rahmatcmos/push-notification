@@ -105,7 +105,6 @@ namespace App\Payloads;
 use App\Post;
 use DeveloperDynamo\PushNotification\Contracts\Payload;
 
-//AbstractPayload add array capability to your class
 class InsertPostPayload extends Payload
 {
 	/**
@@ -128,7 +127,6 @@ class InsertPostPayload extends Payload
 		$this->androidPayload = [
 				"title" 	=> $post->title,
 				"message" 	=> $post->content,
-				"image" 	=> "http://www.checkit-mobile.it/".$post->photo,
 		];
 	}
 }
