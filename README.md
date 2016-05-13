@@ -139,13 +139,13 @@ To sending payload to list of devices tokens you can use `NotificationBridge`
 
 ###Regular sending
 ```php
+//Create payload
 $payload = new InsertPostPayload(Post::find($id));
 
-//Eloquent model that use TokenTrait
+//Retrieve devices list with your own criteria
 $tokens = YourPushTokenTable::all();
 
 //send directly
-//$tokens needs to be an array
 NotificationBridge::send($payload, $tokens);
 ```
 
@@ -153,13 +153,13 @@ NotificationBridge::send($payload, $tokens);
 You can use queue to sending push notifications to improve your system performace
 
 ```php
+//Create payload
 $payload = new InsertPostPayload(Post::find($id));
 
-//Eloquent model that use TokenTrait
+//Retrieve devices list with your own criteria
 $tokens = YourPushTokenTable::all();
 
 //push in queue
-//$tokens needs to be an array
 NotificationBridge::queue($payload, $tokens, "queue-name");
 ```
 
