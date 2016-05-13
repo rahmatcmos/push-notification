@@ -28,12 +28,8 @@ class ApnService extends AbstractClient implements ServiceInterface
 	 * @param Payload $payload
 	 * @param array $tokens
 	 */
-	public function send($payload, $tokens)
+	public function send(Payload $payload, $tokens)
 	{
-		if (!($payload instanceof Payload)) {
-			throw new \InvalidArgumentException('Payload must be an instance of AbstractPayload');
-		}
-		
     	if(!count($tokens)>0)
     		return true;
 

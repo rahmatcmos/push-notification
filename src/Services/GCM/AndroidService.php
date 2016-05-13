@@ -29,12 +29,8 @@ class AndroidService implements ServiceInterface
 	 * @param AbstractPayload $payload
 	 * @param array $tokens
 	 */
-	public function send($payload, $tokens)
+	public function send(Payload $payload, $tokens)
 	{
-		if (!($payload instanceof Payload)) {
-			throw new \InvalidArgumentException('Payload must be an instance of AbstractPayload');
-		}
-		
 		if(!is_array($tokens)){
 			throw new \InvalidArgumentException('Tokens must be an array');
 		}
