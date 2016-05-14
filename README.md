@@ -167,7 +167,7 @@ class AddPhotoPayload extends Payload
 		
 		//Android payload format
 		$this->androidPayload = [
-				"title" 	=> $user->first_name." ha postato una foto",
+				"title" 	=> $user->first_name." posted a photo",
 				"message" 	=> $user->first_name." added a new photo in her gallery",
 		];
 	}
