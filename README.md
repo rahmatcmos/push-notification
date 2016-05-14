@@ -70,9 +70,9 @@ class YourPushTokenTable extends Model
 
 To works automatically with PushNotification Package your table needs two columns, one that contains platform name, and the other one that contains device token.
 
-By default this two columns names are cosidered `"platform"` and `"device_token"`, but if your table on DB use different names you can customize them according with your table's structure.
+By default this two columns names are cosidered `"platform"` and `"device_token"`, but if your table on DB use differents names you can customize them according with your table's structure.
 
-For example, in your table you have platform column named "os", and column to store device_token is named "token". You can overwrite standard name used from package using `$columnName` property:
+For example, in your table you have platform column named "os" instead of "platform", and column to store device token is named "token" instead "device_token". You can overwrite standard name used from package using `$columnName` property:
 
 ```php
 class YourPushTokenTable extends Model
