@@ -41,7 +41,7 @@ abstract class Payload
 	{
 		$this->checkIosMandatoryFields();
 		
-		return $this->rawFilter($this->iosPayload);
+		return ["aps" => $this->rawFilter($this->iosPayload)];
 	}
 	
 	/**
