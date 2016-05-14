@@ -4,7 +4,7 @@ return [
 
     "ios" => [
     	/*
-    	 * A valid PEM certificate generated from your Apple Push Service certificate
+    	 * A valid PEM certificate generated from Apple Push Service certificate
     	 */
         "certificate" 	=> storage_path('doc')."/aps.pem",
     		

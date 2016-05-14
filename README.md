@@ -46,7 +46,34 @@ Run follow composer command:
 ```php
 php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNotificationProvider"
 ```
-Remember to add your GCM api key and PEM certificate path in config file.
+
+This command will generate `pushnotification.php` in your config directory.
+```php
+return [
+
+    "ios" => [
+    	/*
+    	 * A valid PEM certificate generated from Apple Push Service certificate
+    	 */
+        "certificate" 	=> storage_path('doc')."/aps.pem",
+    		
+    	/*
+    	 * Password used to generate a certificate
+    	 */
+        "passPhrase"  	=> ""
+    ],
+	
+    "android" => [
+    	/*
+    	 * Google GCM api key
+    	 * You can retrieve your key in Google Developer Console
+    	 */
+        "apiKey"      	=> "",
+    ]
+
+];
+```
+Remember to add your GCM api key and PEM certificate path.
 
 #Tokens
 You should have a model to store devices informations into your database, for example: 
