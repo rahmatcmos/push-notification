@@ -37,7 +37,7 @@ abstract class Payload
 	 * 
 	 * @return array
 	 */
-	public function getIosFormat()
+	final public function getIosFormat()
 	{
 		$this->checkIosMandatoryFields();
 		
@@ -49,7 +49,7 @@ abstract class Payload
 	 * 
 	 * @return array
 	 */
-	public function getAndroidFormat()
+	final public function getAndroidFormat()
 	{
 		$this->checkAndroidMandatoryFields();
 		
