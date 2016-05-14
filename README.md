@@ -1,7 +1,7 @@
 # push-notification
 For introduction see this article: [Developer Dynamo PushNotification package](http://developerdynamo.it/2016/05/01/super-powerfull-laravel-pushnotification-package/)
 
-There are more library in any language that help you to send push notifications but in my opinion nobody help you to make and manage easily a complete push notification service.
+There are many PHP library that help you to send push notifications but in my opinion nobody help you to easily make and manage a complete push notification service.
 
 With this package you can create your Payload collection for any relevant event that could be happen for your users, filter devices list in your DB using Eloquent and send from one to millions messages with a single line of code.
 
