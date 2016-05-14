@@ -134,7 +134,7 @@ You can proceed to create your payload collection for every event or message tha
 Now you are able to get a list of devices tokens from your DB and you have a payload for your specific event.
 To send a payload to a list of devices you can use `NotificationBridge`.
 
-###Regular sending
+###Regular send
 ```php
 //Create payload
 $payload = new AddPhotoPayload(User::findOrFail(1));
@@ -146,8 +146,8 @@ $tokens = YourPushTokenTable::all();
 NotificationBridge::send($payload, $tokens);
 ```
 
-###Queue push sending 
-You can use queue to sending push notifications to improve your system performace
+###Send by Queue 
+You can use queue to send push notifications to improve your system performace
 
 ```php
 //Create payload
