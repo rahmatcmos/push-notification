@@ -6,7 +6,7 @@ return [
     	/*
     	 * A valid PEM certificate generated from Apple Push Service certificate
     	 */
-        "certificate" 	=> storage_path('doc')."/aps.pem",
+        "certificate" 	=> storage_path('app')."/aps.pem",
     		
     	/*
     	 * Password used to generate a certificate
