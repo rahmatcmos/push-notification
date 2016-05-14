@@ -103,7 +103,7 @@ By default this two columns names are cosidered `"platform"` and `"device_token"
 +--------------+
 ```
 
-If your table on DB use differents names you can customize them according with your table's structure. 
+If your table on DB are using differents names you can customize them according with your table's structure. 
 For example, in your table you have platform column named "os" instead of "platform", and column to store device token is named "token" instead of "device_token":
 
 ```
@@ -111,8 +111,8 @@ For example, in your table you have platform column named "os" instead of "platf
 | Field        |
 +--------------+
 | id           |
-| os           | (android, ios)
-| token        |
+| os           | (instead of "platform")
+| token        | (instead of "device_token")
 | created_at   |
 | updated_at   |
 +--------------+
