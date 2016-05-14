@@ -131,7 +131,7 @@ class AddPhotoPayload extends Payload
 You can proceed to create your payload collection for every event or message that you want send to your users.
 
 #Send
-Ok, now you are able to get a list of devices tokens from your DB and you have a payload for your specific event.
+Now you are able to get a list of devices tokens from your DB and you have a payload for your specific event.
 To sending payload to list of devices you can use `NotificationBridge`.
 
 ###Regular sending
