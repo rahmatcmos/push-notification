@@ -47,7 +47,7 @@ Run follow composer command:
 php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNotificationProvider"
 ```
 
-This command will generate `pushnotification.php` in your config directory.
+This command will generate `pushnotification.php` file in your config directory.
 ```php
 return [
 
