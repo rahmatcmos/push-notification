@@ -132,7 +132,7 @@ You can proceed to create your payload collection for every event or message tha
 
 #Send
 Now you are able to get a list of devices tokens from your DB and you have a payload for your specific event.
-To sending payload to list of devices you can use `NotificationBridge`.
+To send a payload to a list of devices you can use `NotificationBridge`.
 
 ###Regular sending
 ```php
