@@ -139,7 +139,7 @@ class YourPushTokenTable extends Model
 You can design your table as you want, only this two fields are mandatory to work with PushNotification Package. 
 
 #Payload
-You just create a class that implement `DeveloperDynamo\PushNotification\Contracts\Payload` and overwrite `iosPayload` and `androidPayload` properties with your payload content.
+You just create a class that implements `DeveloperDynamo\PushNotification\Contracts\Payload` and overwrite `iosPayload` and `androidPayload` properties with your payload content.
 
 ```php
 namespace App\Payload;
