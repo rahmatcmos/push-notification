@@ -1,17 +1,12 @@
 # push-notification
 For introduction see this article: [Developer Dynamo PushNotification package](http://developerdynamo.it/2016/05/01/super-powerfull-laravel-pushnotification-package/)
 
-With Developer Dynamo Push Notification you can send millions messages to millions devices with one line of code.
+There are more library in any language that help you to send push notifications but in my opinion nobody help you to make and manage easily a complete push notification management service.
 
-This package use the best Laravel features to execute very expensive tasks in terms of system resources as sending massive push notifications messages.
-
-You can use directly your Eloquent model to filter your tokens list and send a payload.
-
-###Queue support
-With Queue you can delegate sending task to an external Queue service as Amazon SQS to drastically increase your application performace without any change of your codebase.
+With this package you can create your Payload collection for any relevant event that could be happen for your users, filter devices list using directly your Eloquent model and send from one to millions messages with a single line of code.
 
 ###Platform actually supported
-- iOS - apns (Apple Push Notificatio Service)
+- iOS - apns (Apple Push Notification Service)
 - android - GCM (Google Cloud Messaging)
 
 #Install
@@ -51,8 +46,9 @@ Run follow composer command:
 ```php
 php artisan vendor:publish --provider="DeveloperDynamo\PushNotification\PushNotificationProvider"
 ```
+Remember to add your GCM api key and PEM certificate path in config file.
 
-#Quick start
+#Tokens
 You should have a model to store devices informations into your database, for example: 
 ```php
 class YourPushTokenTable extends Model
@@ -62,6 +58,7 @@ class YourPushTokenTable extends Model
 ```
 
 To fit your model to be used directly from PushNotification Package you simply need to attach our Trait:
+
 ```php
 use DeveloperDynamo\PushNotification\TokenTrait;
 
@@ -96,51 +93,51 @@ class YourPushTokenTable extends Model
 
 You can retrieve list of tokens directly from your DB table with Eloquent benefits and send your payload across all platforms without any other intermediate steps.
 
-#Create your payload
+#Payload
 You just create a class that implement `DeveloperDynamo\PushNotification\Contracts\Payload` and overwrite `iosPayload` and `androidPayload` properties with your payload content.
 
 ```php
-namespace App\Payloads;
+namespace App\Payload;
 
-use App\Post;
+use App\User;
 use DeveloperDynamo\PushNotification\Contracts\Payload;
 
-class InsertPostPayload extends Payload
+class AddPhotoPayload extends Payload
 {
 	/**
-	 * Generate Notification Payload for Add Post event
+	 * Generate Notification Payload
 	 *
-	 * @param Post $post
+	 * @param User $user
 	 * @return void
 	 */
-	public function __construct(Post $post)
+	public function __construct(User user)
 	{
 		//IOS payload format	
 		$this->iosPayload = [
 				"alert" => [
-					"title" => $post->title,
-					"body" 	=> $post->sub_title,
+					"title" => $user->first_name." posted a photo",
+					"body" 	=> $user->first_name." added a new photo in her gallery",
 				],
 		];
 		
 		//Android payload format
 		$this->androidPayload = [
-				"title" 	=> $post->title,
-				"message" 	=> $post->sub_title,
+				"title" 	=> $user->first_name." ha postato una foto",
+				"message" 	=> $user->first_name." added a new photo in her gallery",
 		];
 	}
 }
 ```
-You can create your payload collections for every event or message that you want send to your users.
+You can go on to create your payload collections for every event or message that you want send to your users.
 
-#Send example
-Ok, now you can get lists of devices tokens from your DB and you can create a payload for specifics events.
-To sending payload to list of devices tokens you can use `NotificationBridge`
+#Send
+Ok, now you are able to get a list of devices tokens from your DB and you have a payload for your specific event.
+To sending payload to list of devices you can use `NotificationBridge`.
 
 ###Regular sending
 ```php
 //Create payload
-$payload = new InsertPostPayload(Post::findOrFail(1));
+$payload = new InsertPostPayload(User::findOrFail(1));
 
 //Retrieve devices list with your own criteria
 $tokens = YourPushTokenTable::all();
@@ -154,7 +151,7 @@ You can use queue to sending push notifications to improve your system performac
 
 ```php
 //Create payload
-$payload = new InsertPostPayload(Post::findOrFail(1));
+$payload = new InsertPostPayload(User::findOrFail(1));
 
 //Retrieve devices list with your own criteria
 $tokens = YourPushTokenTable::all();
