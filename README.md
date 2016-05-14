@@ -76,15 +76,7 @@ return [
 Remember to add your GCM api key and PEM certificate path.
 
 #Tokens
-You should have a model to store devices informations into your database, for example: 
-```php
-class YourPushTokenTable extends Model
-{
-    //
-}
-```
-
-To fit your model to be used directly from PushNotification Package you simply need to add TokenTrait:
+You should have a model to store devices informations into your database. To fit your model to be used directly from PushNotification Package you simply need to add `use TokenTrait`:
 
 ```php
 use DeveloperDynamo\PushNotification\TokenTrait;
