@@ -137,7 +137,7 @@ To sending payload to list of devices you can use `NotificationBridge`.
 ###Regular sending
 ```php
 //Create payload
-$payload = new InsertPostPayload(User::findOrFail(1));
+$payload = new AddPhotoPayload(User::findOrFail(1));
 
 //Retrieve devices list with your own criteria
 $tokens = YourPushTokenTable::all();
@@ -151,7 +151,7 @@ You can use queue to sending push notifications to improve your system performac
 
 ```php
 //Create payload
-$payload = new InsertPostPayload(User::findOrFail(1));
+$payload = new AddPhotoPayload(User::findOrFail(1));
 
 //Retrieve devices list with your own criteria
 $tokens = YourPushTokenTable::all();
