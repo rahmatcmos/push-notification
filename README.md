@@ -80,7 +80,7 @@ class YourPushTokenTable extends Model
     use TokenTrait;
     
     /**
-	 * Column name into DB table to store device information
+	 * Column name into DB table to store device informations
 	 * 
 	 * @var array
 	 */
