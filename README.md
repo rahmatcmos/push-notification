@@ -84,7 +84,7 @@ class YourPushTokenTable extends Model
 }
 ```
 
-To fit your model to be used directly from PushNotification Package you simply need to attach our Trait:
+To fit your model to be used directly from PushNotification Package you simply need to add TokenTrait:
 
 ```php
 use DeveloperDynamo\PushNotification\TokenTrait;
